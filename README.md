@@ -5,8 +5,8 @@ A node.js library helping you process all points in any given 2D Polygon.
 ## How does it work?
 
 * Given polygon becomes triangulated with [earcut](https://github.com/mapbox/earcut)
-* Each resulting triangle gets iterated to gather the points inside
-
+* Resulting points on the triangle sides are determined with [bresenham](https://github.com/madbence/node-bresenham)
+* Points in between sides are determined and passed to the callback!
 
 ## How to install
 
