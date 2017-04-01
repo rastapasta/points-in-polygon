@@ -12,8 +12,7 @@ class PointsInPolygon {
     try {
       var triangles = earcut(vertices, holes);
     } catch (e) {
-      console.error(e);
-      return null;
+      throw new Error("Triangulation failed: "+e);
     }
 
     // Process each resulting triangle
@@ -32,7 +31,6 @@ class PointsInPolygon {
     polygon.every(ring => {
       // Invalid inner polygons are currently gracefully ignored
       // while the outer polygon must be valid
-
       if (vertices.length) {
         if (ring.length < 3) {
           return true;

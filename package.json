@@ -16,7 +16,6 @@
   "author": "Michael Straßburger <codepoet@cpan.org>",
   "license": "MIT",
   "dependencies": {
-    "babel-plugin-transform-object-rest-spread": "^6.23.0",
     "babel-preset-es2015": "^6.24.0",
     "babel-register": "^6.24.0",
     "bresenham": "0.0.4",
