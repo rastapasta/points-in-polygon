@@ -1,0 +1,19 @@
+{
+  "name": "points-in-polygon",
+  "version": "0.1.0",
+  "description": "Calculate all points inside any polygon",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rastapasta/points-in-polygon.git"
+  },
+  "keywords": [
+    "polygon",
+    "points",
+    "triangulation",
+    "fill"
+  ],
+  "author": "Michael Straßburger <codepoet@cpan.org>",
+  "license": "MIT",
+  "dependencies": {}
+}
