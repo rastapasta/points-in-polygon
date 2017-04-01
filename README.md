@@ -6,7 +6,7 @@ A node.js library helping you to process and rasterize all points in any given 2
 
 * Triangulation is done with [earcut](https://github.com/mapbox/earcut)
 * Points in triangles are determined using co-project [points-in-triangle](https://github.com/rastapasta/points-in-triangle)
-* All points in each triangle are iterated and passed to the callback.
+* All points in the polygon is iterated and passed to the callback.
 
 ## How to install
 
