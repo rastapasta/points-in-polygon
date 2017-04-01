@@ -1,9 +1,9 @@
-import earcut from 'earcut';
-import bresenham from 'bresenham';
+const earcut = require('earcut');
+const pointsInTriangle = require('points-in-triangle');
 
-class PointsInPolygon {
+module.exports = class PointsInPolygon {
   // Process a given polygon and call the callback for each point in it
-  // Format: [[{x,y},...],[{x,y},...],[{x,y},...]]
+  // Format: [[[outerX,outerY],...],[[innerX,innerY],...],[[innerX,innerY],...]]
   process(polygon, callback) {
     // Prepare the given polygon points
     let [vertices, holes] = this._preparePolygon(polygon);
@@ -18,11 +18,11 @@ class PointsInPolygon {
     // Process each resulting triangle
     for (let i=0; i<triangles.length; i+=3) {
       let triangle = [0, 1, 2].map(j => this._extractPoint(vertices, triangles[i+j]));
-      this._pointsInTriangle(triangle, callback);
+      pointsInTriangle(triangle, callback);
     }
   }
 
-  // Converts given [[{outerX,outerY},...],[{innerX,innerY},...],[{innerX, innerY},...]]
+  // Converts given [[[outerX,outerY],...],[[innerX,innerY],...],[[innerX,innerY],...]]
   // polygon input into the input format which earcut expects to receive
   _preparePolygon(polygon) {
     let vertices = [],
@@ -40,7 +40,7 @@ class PointsInPolygon {
         return false;
       }
 
-      ring.forEach(point => vertices.push(point.x, point.y));
+      ring.forEach(point => vertices.push(point[0], point[1]));
       return true;
     });
 
@@ -51,36 +51,4 @@ class PointsInPolygon {
   _extractPoint(vertices, pointId) {
     return [vertices[pointId*2], vertices[pointId*2+1]];
   }
-
-  // Inspired by section III of
-  // http://www.sunshine2k.de/coding/java/TriangleRasterization/TriangleRasterization.html
-  _pointsInTriangle(triangle, callback) {
-    // Get all points on the triangles' sides ...
-    let points = [].concat(
-      this._line(triangle[1], triangle[2]),
-      this._line(triangle[0], triangle[2]),
-      this._line(triangle[0], triangle[1])
-    )
-    // ... and sort them by y, x
-    .sort((a, b) => a.y === b.y ? a.x-b.x : a.y-b.y);
-
-    // To finally iterate over the space between each point
-    points.forEach((point, i) => {
-      let next = points[i+1];
-      if (next && point.y === next.y) {
-        for(let x=point.x; x<next.x; x++) {
-          callback(x, point.y);
-        }
-      } else {
-        callback(point.x, point.y);
-      }
-    });
-  }
-
-  // Returns all points on a given line
-  _line(from, to)  {
-    return bresenham(from[0], from[1], to[0], to[1]);
-  }
 }
-
-export default new PointsInPolygon();

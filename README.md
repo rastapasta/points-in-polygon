@@ -5,7 +5,7 @@ A node.js library helping you to process and rasterize all points in any given 2
 ## How does it work?
 
 * Triangulation is done with [earcut](https://github.com/mapbox/earcut)
-* Triangle sides are determined using [bresenham](https://github.com/madbence/node-bresenham)
+* Points in triangles are determined using co-project [points-in-triangle](https://github.com/rastapasta/points-in-triangle)
 * All points in each triangle are iterated and passed to the callback.
 
 ## How to install
@@ -20,15 +20,16 @@ npm install --save points-in-polygon
 ```js
 const pointsInPolygon = require('points-in-polygon');
 
+// Format: [[[outerX,outerY],...],[[innerX,innerY],...],[[innerX,innerY],...]]
 let polygon = [
   // first element is defining the outer area of the polygon
-  [{x: 0, y: 0}, {x: 10, y: 0}, {x: 10, y: 10}, {x: 0, y: 10}],
+  [[0, 0], [10, 0], [10, 10], [0, 10]],
   // following elements will define the inner cut out areas
-  [{x: 3, y: 3}, {x: 6, y: 3}, {x: 6, y: 6}, {x: 3, y: 6}],
+  [[3, 3], [6, 3], [6, 6], [3, 6]],
   ...
 ];
 // triangulate, rasterize and calculate points inside the polygon
-pointsInPolygon.process(polygon, (x, y) => console.log(x, y));
+pointsInPolygon(polygon, (x, y) => console.log(x, y));
 ```
 
 ## License
