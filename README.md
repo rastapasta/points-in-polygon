@@ -1,12 +1,17 @@
 # points-in-polygon
 
-A node.js library helping you to process and rasterize all points in any given 2D polygon.
+A node.js library helping you to process all rasterized points in any 2D polygon.
 
 ## How does it work?
 
-* Triangulation is done with [earcut](https://github.com/mapbox/earcut)
-* Points in triangles are determined using co-project [points-in-triangle](https://github.com/rastapasta/points-in-triangle)
-* All points in the polygon is iterated and passed to the callback.
+* Triangulation is done via [earcut](https://github.com/mapbox/earcut)
+* Points in the resulting triangles are determined using co-project [points-in-triangle](https://github.com/rastapasta/points-in-triangle)
+* All points in the polygon are iterated and passed to the callback.
+
+## What is it for?
+
+* Rendering: Draw any given polygon!
+* GIS: Create height maps of 2D shape files!
 
 ## How to install
 
@@ -31,6 +36,10 @@ let polygon = [
 // triangulate, rasterize and calculate points inside the polygon
 pointsInPolygon(polygon, (x, y) => console.log(x, y));
 ```
+
+## Special thanks
+
+* [mourner](https://github.com/mourner) for all his work on wonderful GIS algorithms (like [earcut](https://github.com/mapbox/earcut))
 
 ## License
 #### The MIT License (MIT)
