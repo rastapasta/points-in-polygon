@@ -1,6 +1,6 @@
 {
   "name": "points-in-polygon",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Calculate all points inside any polygon",
   "main": "index.js",
   "repository": {
