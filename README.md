@@ -1,5 +1,7 @@
 # points-in-polygon
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/rastapasta/points-in-polygon.svg)](https://greenkeeper.io/)
+
 A node.js library helping you to process all rasterized points in any 2D polygon.
 
 ## How does it work?
